@@ -73,6 +73,14 @@ public class Create_your_quiz extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(Create_your_quiz.this, "Data Added Sucessfully", Toast.LENGTH_SHORT).show();
+                cat.setText(" ");
+                quesno.setText(" ");
+                ques.setText(" ");
+                op1.setText(" ");
+                op2.setText(" ");
+                op3.setText(" ");
+                op4.setText(" ");
+                ans.setText(" ");
             }
         });
 

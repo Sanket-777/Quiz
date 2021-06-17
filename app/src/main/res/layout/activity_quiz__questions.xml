@@ -52,17 +52,10 @@
         android:id="@+id/options"
         android:orientation="vertical"
         >
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="#7C7D7F"
-            >
-
             <RadioButton
-                android:layout_margin="5dp"
                 android:id="@+id/opt1"
+                android:background="#7C7D7F"
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/black"
@@ -71,16 +64,10 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="#7C7D7F"
-            >
+
             <RadioButton
-                android:layout_margin="5dp"
+                android:background="#7C7D7F"
+                android:layout_margin="10dp"
                 android:buttonTint="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,15 +77,10 @@
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:text="Option 2"/>
-        </androidx.cardview.widget.CardView> <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="#7C7D7F"
-        >
+
         <RadioButton
-            android:layout_margin="5dp"
+            android:background="#7C7D7F"
+            android:layout_margin="10dp"
             android:buttonTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,15 +90,10 @@
             android:textColor="@color/black"
             android:textSize="25sp"
             android:text="Option 3"/>
-    </androidx.cardview.widget.CardView> <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="#7C7D7F"
-        >
+
         <RadioButton
-            android:layout_margin="5dp"
+            android:background="#7C7D7F"
+            android:layout_margin="10dp"
             android:buttonTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,7 +103,6 @@
             android:textColor="@color/black"
             android:textSize="25sp"
             android:text="Option 4"/>
-    </androidx.cardview.widget.CardView>
 
 
     </RadioGroup>

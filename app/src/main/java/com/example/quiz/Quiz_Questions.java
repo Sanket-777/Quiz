@@ -92,6 +92,7 @@ public class Quiz_Questions extends AppCompatActivity {
     private void Timer() {
         new CountDownTimer(20000,1000)
         {
+
             @Override
             public void onTick(long millisUntilFinished) {
                 time=time-1;
