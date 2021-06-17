@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Create_your_quiz"
+    android:orientation="vertical">
+    <EditText
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:id="@+id/category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="category"
+        />
+<EditText
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:id="@+id/questionno"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Enter Question Number:Q1"
+    />
+    <EditText
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Question "
+        /><EditText
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:id="@+id/c_opt1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Option 1"
+    /><EditText
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:id="@+id/c_opt2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Option 2"
+    /><EditText
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:id="@+id/c_opt3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="option 4"
+    /><EditText
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:id="@+id/c_opt4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="option 4"
+    /><EditText
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:id="@+id/c_ans"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Enter answer number"
+    />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="submit"
+        android:id="@+id/c_submit"
+        android:layout_gravity="center"
+        />
+
+
+</LinearLayout>

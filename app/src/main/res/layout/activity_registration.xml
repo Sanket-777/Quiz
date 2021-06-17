@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+    tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Registration"
+            android:textSize="35sp"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:layout_marginTop="100sp"
+            android:id="@+id/Username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custome_input"
+            android:drawableStart="@drawable/ic_name"
+            android:drawableTint="#0099ff"
+            android:drawablePadding="12dp"
+            android:hint="Name"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custome_input"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="12dp"
+            android:drawableTint="#0099ff"
+            android:hint="Email"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custome_input"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="12dp"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:drawableTint="#0099ff"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/conf_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custome_input"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="12dp"
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            android:drawableTint="#0099ff"
+            android:padding="15dp" />
+
+        <Button
+            android:id="@+id/nextbtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:backgroundTint="#0099ff"
+            android:text="Sign up"
+            android:textColor="@color/black" />
+    </LinearLayout>

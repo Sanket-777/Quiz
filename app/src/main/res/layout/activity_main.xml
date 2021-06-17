@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wel Come to the Quiz "
+        android:textSize="35dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        />
+           
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50sp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Cpp"
+                    android:layout_width="50dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10sp"
+                    android:layout_weight="1"
+                    android:background="#E07575"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    app:cardBackgroundColor="#F8A0A0"
+                    app:cardCornerRadius="100dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="C++"
+                        android:textSize="25sp" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/C"
+                    android:layout_width="50dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="100dp"
+                    android:background="#E07575"
+                    android:layout_margin="10sp"
+                    app:cardBackgroundColor="#F8A0A0"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="C"
+                        android:textSize="25sp" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
+        android:weightSum="2"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Java"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="100dp"
+            android:background="#E07575"
+            android:layout_margin="10sp"
+            app:cardBackgroundColor="#F8A0A0"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Java"
+                android:textSize="25sp" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Php"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="100dp"
+            android:background="#E07575"
+            android:layout_margin="10sp"
+            app:cardBackgroundColor="#F8A0A0"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Php"
+                android:textSize="25sp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout> <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50sp"
+    android:weightSum="2"
+    android:orientation="horizontal">
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="100dp"
+        android:background="#E07575"
+        android:layout_margin="10sp"
+        app:cardBackgroundColor="#F8A0A0"
+        android:id="@+id/Javascript"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20dp" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Javascript"
+            android:textSize="25sp" />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="100dp"
+        android:background="#E07575"
+        android:layout_margin="10sp"
+        app:cardBackgroundColor="#F8A0A0"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:id="@+id/HTML"
+        android:textColor="@color/black"
+        android:textSize="20dp" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="HTML"
+            android:textSize="25sp" />
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Create Your Own Quiz"
+    android:id="@+id/createquiz"
+    android:layout_gravity="center"
+    />
+
+
+
+
+
+
+</LinearLayout>
