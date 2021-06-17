@@ -3,6 +3,7 @@ package com.example.quiz;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -25,7 +26,7 @@ public class Quiz_Questions extends AppCompatActivity {
 
     TextView ques,tim;
     RadioGroup op;
-    int uanswer,i=0,j,catid,useranswer[],questionno=1,Result;
+    int uanswer,i=0,j,catid,useranswer[],databsanswer[],questionno=1,Result;
     Button nxtquestion;
     String answer;
     RadioButton opt1,opt2,opt3,opt4;
@@ -33,15 +34,22 @@ public class Quiz_Questions extends AppCompatActivity {
     DatabaseReference ref;
     int count;
     int score;
-    int time=20;
     Bundle  extras;
     boolean optionselected;
     private  FirebaseFirestore firestore;
     ProgressDialog progress;
+    CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz__questions);
+
+        progress = new ProgressDialog(Quiz_Questions.this);
+        progress.setMessage("Loading Question...) ");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setCancelable(false);
+        progress.setIndeterminate(true);
+        progress.show();
         ques = findViewById(R.id.Question);
         op = findViewById(R.id.options);
         opt1 = findViewById(R.id.opt1);
@@ -52,19 +60,48 @@ public class Quiz_Questions extends AppCompatActivity {
         extras = getIntent().getExtras();
         tim = findViewById(R.id.timer);
         useranswer = new int[12];
-        String[] dbanwser = new String[12];
+        databsanswer =  new int[12];
         questionno=1;
         count=0;
         catid = extras.getInt("catid");
         firestore = FirebaseFirestore.getInstance();
-        progress = new ProgressDialog(Quiz_Questions.this);
-        progress.setMessage("Loading Question...) ");
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progress.setIndeterminate(true);
-        progress.show();
         loaddata();
-        progress.dismiss();
-        Timer();
+        countDownTimer = new CountDownTimer(20000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tim.setBackgroundColor(Color.rgb(182,212,236));
+                long time =millisUntilFinished / 1000;
+                if(time<=0) {
+                    tim.setText("Next Question in: " + millisUntilFinished / 1000);
+                    questionno=questionno+1;
+                    op.clearCheck();
+                    progress.show();
+                    loaddata();
+                    optionselected=true;
+                }
+                else if(time<5)
+                {
+                    tim.setBackgroundColor(Color.RED);
+                    tim.setText("Next Question in: " + millisUntilFinished / 1000);
+                }
+
+                else if(time>0)
+                {
+                    tim.setText("Next Question in: " + millisUntilFinished / 1000);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                Toast.makeText(Quiz_Questions.this, "Time Up", Toast.LENGTH_SHORT).show();
+                questionno=questionno+1;
+                op.clearCheck();
+                progress.show();
+                optionselected=true;
+                loaddata();
+
+            }
+        };
 
         nxtquestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,43 +114,16 @@ public class Quiz_Questions extends AppCompatActivity {
                 }
                 else if(optionselected==true)
                 {
+                    countDownTimer.cancel();
                     progress.show();
                     questionno=questionno+1;
                     op.clearCheck();
                     loaddata();
-                    time=20;
-                    Timer();
                     progress.dismiss();
                 }
             }
         });
     }
-
-    private void Timer() {
-        new CountDownTimer(20000,1000)
-        {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                time=time-1;
-                String S_time=Integer.toString(time);
-                tim.setText(S_time);
-            }
-
-            @Override
-            public void onFinish() {
-                Toast.makeText(Quiz_Questions.this, "Time Up", Toast.LENGTH_SHORT).show();
-                questionno=questionno+1;
-                op.clearCheck();
-                progress.show();
-                loaddata();
-                progress.dismiss();
-                time=20;
-                Timer();
-            }
-        }.start();
-    }
-
     private void checkanswer() {
         optionselected = true;
         if(opt1.isChecked())
@@ -144,6 +154,7 @@ public class Quiz_Questions extends AppCompatActivity {
             optionselected = false;
         }
         int dbanswer = Integer.parseInt(answer);
+        databsanswer[questionno]=dbanswer;
         if(dbanswer==uanswer)
         {
             count=count+1;
@@ -171,9 +182,16 @@ public class Quiz_Questions extends AppCompatActivity {
                         opt3.setText(documentSnapshot.getString("C"));
                         opt4.setText(documentSnapshot.getString("D"));
                         answer =documentSnapshot.getString("Ans");
+                        progress.dismiss();
+                        countDownTimer.start();
+
+
                     }
                     else if(i==11)
                     {
+                        tim.setVisibility(View.GONE);
+                        countDownTimer.cancel();
+                        progress.dismiss();
                         AlertDialog.Builder builder = new AlertDialog.Builder(Quiz_Questions.this);
                         builder.setMessage("Congratulations ! You have Completed the Quiz");
                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -194,7 +212,6 @@ public class Quiz_Questions extends AppCompatActivity {
                     }
                     else {
                         Log.d(TAG, "Retrieval Failed:"+i);
-                        Toast.makeText(Quiz_Questions.this, "Failed to Retrieve Question", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
