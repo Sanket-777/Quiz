@@ -298,10 +298,6 @@ public class Quiz_Questions extends AppCompatActivity {
                 }
             });
 
-
-
-
-
     }
 
     private void setMessage() {
@@ -318,7 +314,7 @@ public class Quiz_Questions extends AppCompatActivity {
                 // Do nothing but close the dialog
                 score=count;
                 Intent i = new Intent(Quiz_Questions.this, com.example.quiz.Result.class);
-                String highs = hightxt;
+                int highs = Integer.parseInt(hightxt);
 
 
 
