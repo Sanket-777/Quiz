@@ -66,7 +66,7 @@ public class Result extends AppCompatActivity {
         Log.d(TAG, "onCreate: "+wrongques);
         Log.d(TAG, "onCreate: "+wrongans);
 
-        highscore = Integer.parseInt(extras.getString("Highscore"));
+        highscore = extras.getInt("Highscore");
 
         rank = score;
         subject = extras.getString("Subject");

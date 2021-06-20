@@ -342,7 +342,7 @@ public class Quiz_Questions extends AppCompatActivity {
                     i.putExtra("Subject",subject);
                 }
                 Log.d(TAG, "Subject"+subject);
-                i.putExtra("Highscore",highs);
+                i.putExtra("Highscore",Integer.valueOf(highs));
                 i.putExtra("marks",score);
                 i.putExtra("answers",useranswer);
                 i.putExtra("catid",catid);

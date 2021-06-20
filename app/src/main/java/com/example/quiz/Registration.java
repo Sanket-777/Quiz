@@ -92,19 +92,19 @@ public class Registration extends AppCompatActivity {
                             Userdata.put("score_Php", "0");
                             Userdata.put("score_Js", "0");
                             Userdata.put("score_Html", "0");*/
-
                             String userid= mAuth.getCurrentUser().getUid();
                             fstore = FirebaseFirestore.getInstance();
                             DocumentReference documentReference = fstore.collection("Users").document(userid);
                             documentReference.set(Userdata);
+                            startActivity(new Intent(getApplicationContext(),Login.class));
+                            finish();
                             /*ref = FirebaseDatabase.getInstance().getReference().child("Scores");
                             score = new Scores();
                             score.setName(Name);
                             ref.child(userid).setValue(score);*/
                         }
 
-                            startActivity(new Intent(getApplicationContext(),Login.class));
-                            finish();
+
                         }
                     });
                 };
