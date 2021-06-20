@@ -7,12 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".Quiz_Questions"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center|left"
         android:layout_margin="20dp"
+        app:cardBackgroundColor="#B6D4EC">
+        <TextView
+            android:id="@+id/highscore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Highscore:0"
+            android:padding="10dp"
+            android:textSize="25dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_gravity="center|right"
         app:cardBackgroundColor="#B6D4EC"
         >
         <TextView
@@ -21,10 +42,11 @@
             android:layout_height="wrap_content"
             android:text="00"
             android:padding="10dp"
-            android:textSize="35dp"/>
+            android:textSize="25dp"/>
 
 
     </androidx.cardview.widget.CardView>
+    </LinearLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +63,7 @@
             android:padding="10dp"
             android:textAlignment="center"
             android:text="Question"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:textColor="@color/white"
             />
     </androidx.cardview.widget.CardView>

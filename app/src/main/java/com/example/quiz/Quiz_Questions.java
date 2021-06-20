@@ -18,32 +18,34 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Quiz_Questions extends AppCompatActivity {
 
-    TextView ques,tim;
+    TextView ques,tim,high;
+    long Highscore_C=0;
     RadioGroup op;
     int uanswer,i=0,j,catid,useranswer[],databsanswer[],questionno=1,Result;
     Button nxtquestion;
-    String answer;
+    String answer,subject,userid,hightxt;
     RadioButton opt1,opt2,opt3,opt4;
+    Bundle extras;
     final String TAG="Data RETRIEVal";
     DatabaseReference ref;
     int count;
     int score;
-    Bundle  extras;
     boolean optionselected;
     private  FirebaseFirestore firestore;
     ProgressDialog progress;
     CountDownTimer countDownTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz__questions);
-
         progress = new ProgressDialog(Quiz_Questions.this);
         progress.setMessage("Loading Question...) ");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -59,12 +61,15 @@ public class Quiz_Questions extends AppCompatActivity {
         nxtquestion = findViewById(R.id.nxtques);
         extras = getIntent().getExtras();
         tim = findViewById(R.id.timer);
+        high = findViewById(R.id.highscore);
         useranswer = new int[12];
         databsanswer =  new int[12];
         questionno=1;
         count=0;
+        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         catid = extras.getInt("catid");
         firestore = FirebaseFirestore.getInstance();
+        checkhighscore();
         loaddata();
         countDownTimer = new CountDownTimer(20000,1000) {
             @Override
@@ -83,12 +88,24 @@ public class Quiz_Questions extends AppCompatActivity {
                 {
                     tim.setBackgroundColor(Color.RED);
                     tim.setText("Next Question in: " + millisUntilFinished / 1000);
+                    if(questionno==10)
+                    {
+                        tim.setText("Quiz Ends in: " + millisUntilFinished / 1000);
+
+                    }
+
                 }
 
                 else if(time>0)
                 {
                     tim.setText("Next Question in: " + millisUntilFinished / 1000);
+                    if(questionno==10)
+                    {
+                        tim.setText("Quiz Ends in: " + millisUntilFinished / 1000);
+
+                    }
                 }
+
             }
 
             @Override
@@ -124,6 +141,62 @@ public class Quiz_Questions extends AppCompatActivity {
             }
         });
     }
+
+    void checkhighscore() {
+        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firestore = FirebaseFirestore.getInstance();
+        firestore.collection("Users").document(userid)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    if(catid==1)
+                    {
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_CppH")));
+                        hightxt = documentSnapshot.getString("score_CppH");
+
+
+                    }
+                    else if(catid==2)
+                    {
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_CH")));
+                        hightxt = documentSnapshot.getString("score_CH");
+
+                    }
+                    else if(catid==3)
+                    {
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_JavaH")));
+                        hightxt = documentSnapshot.getString("score_JavaH");
+                    }
+                    else if(catid==4)
+                    {
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_Php")));
+                        hightxt = documentSnapshot.getString("score_Php");
+                    }
+                    else if(catid==5)
+                    {
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_Js")));
+                        hightxt = documentSnapshot.getString("score_Js");
+                    }
+                    else if(catid==6)
+                    {
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_Html")));
+                        hightxt = documentSnapshot.getString("score_Html");
+                    }
+
+                }
+                else {
+                    high.setText("00");
+                    Log.d(TAG, "onSuccess: "+"No documents Found");
+                    Log.d(TAG, "onSuccess: "+catid);
+                }
+
+            }
+            });
+
+    }
+
+
     private void checkanswer() {
         optionselected = true;
         if(opt1.isChecked())
@@ -153,15 +226,18 @@ public class Quiz_Questions extends AppCompatActivity {
         else {
             optionselected = false;
         }
-        int dbanswer = Integer.parseInt(answer);
+        int dbanswer=0;
+        dbanswer= Integer.valueOf(answer);
         databsanswer[questionno]=dbanswer;
+
         if(dbanswer==uanswer)
         {
             count=count+1;
             Log.d(TAG, "Score: "+count);
         }
-        else 
+        else
         {
+
             Log.d(TAG, "User anser: "+uanswer);
             Log.d(TAG, "System Anser: "+answer);
         }
@@ -171,7 +247,7 @@ public class Quiz_Questions extends AppCompatActivity {
             i++;
             String qs="Q"+i;
             Log.d(TAG, "loaddata: "+qs);
-            firestore.collection("CAT1").document(qs)
+            firestore.collection("CAT"+catid).document(qs)
                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -191,6 +267,8 @@ public class Quiz_Questions extends AppCompatActivity {
                     {
                         tim.setVisibility(View.GONE);
                         countDownTimer.cancel();
+
+                        Log.d(TAG, "onSuccess: "+subject);
                         progress.dismiss();
                         AlertDialog.Builder builder = new AlertDialog.Builder(Quiz_Questions.this);
                         builder.setMessage("Congratulations ! You have Completed the Quiz");
@@ -200,6 +278,29 @@ public class Quiz_Questions extends AppCompatActivity {
                                 // Do nothing but close the dialog
                                 score=count;
                                 Intent i = new Intent(Quiz_Questions.this, com.example.quiz.Result.class);
+                                String highs = hightxt;
+                                if (catid == 1) {
+                                    subject = "Cpp";
+                                    i.putExtra("Subject",subject);
+                                } else if (catid == 2) {
+                                    subject = "C";
+                                    i.putExtra("Subject",subject);
+                                } else if (catid == 3) {
+                                    subject = "Java";
+                                    i.putExtra("Subject",subject);
+                                } else if (catid == 4) {
+                                    subject = "Php";
+                                    i.putExtra("Subject",subject);
+                                } else if (catid == 5) {
+                                    subject = "Js";
+                                    i.putExtra("Subject",subject);
+                                } else if (catid == 6) {
+                                    subject = "Html";
+                                    i.putExtra("Subject",subject);
+                                }
+                                Log.d(TAG, "Subject"+subject);
+
+                                i.putExtra("Highscore",highs);
                                 i.putExtra("marks",score);
                                 startActivity(i);
                                 dialog.dismiss();

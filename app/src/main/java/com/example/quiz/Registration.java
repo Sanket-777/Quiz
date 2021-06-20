@@ -3,6 +3,7 @@ package com.example.quiz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,16 +20,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Registration extends AppCompatActivity {
     EditText  uname, pass, conf_pass,email;
     Button nxtbtn;
     String  Name, Password, Confirm_pass,s_email;
-    DatabaseReference myref,myref2;
     private FirebaseAuth mAuth;
-    String Question="0";
-    String o1,o2,o3,o4;
+    Scores score;
+    FirebaseFirestore fstore;
+    DatabaseReference ref;
     String answer;
     private static final String TAG = "EmailPassword";
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -44,10 +50,6 @@ public class Registration extends AppCompatActivity {
         conf_pass = findViewById(R.id.conf_password);
         nxtbtn = findViewById(R.id.nextbtn);
         email = findViewById(R.id.Email);
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myref = database.getReference("User Details");
-        myref2 = database.getReference("English");
 
 
 
@@ -81,17 +83,35 @@ public class Registration extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Registration.this, "User Sucessfully Created", Toast.LENGTH_SHORT).show();
+                            Map<String,String> Userdata = new HashMap<>();
+                            Userdata.put("Name",Name);
 
+                            /*Userdata.put("score_Cpp", "0");
+                            Userdata.put("score_C", "0");
+                            Userdata.put("score_Java", "0");
+                            Userdata.put("score_Php", "0");
+                            Userdata.put("score_Js", "0");
+                            Userdata.put("score_Html", "0");*/
+
+                            String userid= mAuth.getCurrentUser().getUid();
+                            fstore = FirebaseFirestore.getInstance();
+                            DocumentReference documentReference = fstore.collection("Users").document(userid);
+                            documentReference.set(Userdata);
+                            /*ref = FirebaseDatabase.getInstance().getReference().child("Scores");
+                            score = new Scores();
+                            score.setName(Name);
+                            ref.child(userid).setValue(score);*/
+                        }
 
                             startActivity(new Intent(getApplicationContext(),Login.class));
                             finish();
                         }
-                    }
-                });
+                    });
+                };
 
 
 
-    }
+
 
     private boolean validateform() {
         boolean valid = true;

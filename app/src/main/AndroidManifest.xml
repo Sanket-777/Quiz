@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.quiz">
-
+<uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Quiz">
-        <activity android:name=".Create_your_quiz"></activity>
+        <activity android:name=".Leaderboard"></activity>
+        <activity android:name=".Create_your_quiz" />
         <activity android:name=".Result" />
         <activity android:name=".Quiz_Questions" />
         <activity android:name=".Registration" />

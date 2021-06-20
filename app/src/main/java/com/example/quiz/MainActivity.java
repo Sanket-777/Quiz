@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     CardView c,cpp,java,php,js,html;
-    Button createqu;
+    Button createypur,cat3,cat4,vat6;
     int catid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         js= findViewById(R.id.Javascript);
         php = findViewById(R.id.Php);
         html = findViewById(R.id.HTML);
-        createqu = findViewById(R.id.createquiz);
+        createypur= findViewById(R.id.createquiz);
 
 
         cpp.setOnClickListener(new View.OnClickListener() {
@@ -36,8 +36,59 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Quiz_Questions.class);
+                catid=2;
+                i.putExtra("catid",catid);
+                startActivity(i);
+                finish();
+            }
+        });
+        java.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Quiz_Questions.class);
+                catid=3;
+                i.putExtra("catid",catid);
+                startActivity(i);
+                finish();
+            }
+        });
+        php.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Quiz_Questions.class);
+                catid=4;
+                i.putExtra("catid",catid);
+                startActivity(i);
+                finish();
+            }
+        });
+        js.setOnClickListener(new View.OnClickListener() {@Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Quiz_Questions.class);
+                catid=5;
+                i.putExtra("catid",catid);
+                startActivity(i);
+                finish();
+            }
+        });
+        html.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Quiz_Questions.class);
+                catid=6;
+                i.putExtra("catid",catid);
+                startActivity(i);
+                finish();
+            }
+        });
 
-        createqu.setOnClickListener(new View.OnClickListener() {
+
+
+        createypur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,Create_your_quiz.class));
