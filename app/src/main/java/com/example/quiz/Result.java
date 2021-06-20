@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -26,17 +28,18 @@ import java.util.Map;
 
 public class Result extends AppCompatActivity {
     TextView marks;
-    int score,rank,highscore;
-    Button leaader;
+    int score,rank,highscore,wrongques[],wrongans[],catid;
+    Button leaader,ckques;
     Bundle extras;
     Scores scores;
-    final String TAG="Data RETRIEVal";
+    final String TAG="Get Wrong";
     DatabaseReference ref;
 
     ProgressDialog pg;
     String Userid,subject;
     private FirebaseAuth mAuth;
     FirebaseFirestore fstore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +50,31 @@ public class Result extends AppCompatActivity {
         pg.setMessage("Checking Your Answers");
         pg.setCancelable(false);
         pg.show();
+        wrongans = new int[12];
 
         leaader = findViewById(R.id.lead);
         marks = findViewById(R.id.marks);
+        ckques = findViewById(R.id.checkquestions);
+
+        Intent i =getIntent();
+        wrongans = i.getIntArrayExtra("answers");
+        Log.d(TAG, "onCreate: "+wrongans[1]);
         extras = getIntent().getExtras();
         score = extras.getInt("marks");
+        catid = extras.getInt("catid");
+
+        Log.d(TAG, "onCreate: "+wrongques);
+        Log.d(TAG, "onCreate: "+wrongans);
+
         highscore = Integer.parseInt(extras.getString("Highscore"));
 
         rank = score;
         subject = extras.getString("Subject");
-        Log.d(TAG, "onCreate: "+subject);
-        marks.setText(String.valueOf(score+"/10"));
+        marks.setText(String.valueOf(score + "/10"));
         pg.dismiss();
-        Log.d(TAG, "onCreate: "+score);
 
         Map<String, String> Savescore = new HashMap<>();
-        Savescore.put("score_"+subject,String.valueOf(score));
+        Savescore.put("score_" + subject, String.valueOf(score));
         mAuth = FirebaseAuth.getInstance();
         Userid = mAuth.getCurrentUser().getUid();
         checkscore();
@@ -71,7 +83,7 @@ public class Result extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                  snapshot.getRef().child("score").setValue(score);
+                snapshot.getRef().child("score").setValue(score);
 
             }
 
@@ -83,14 +95,49 @@ public class Result extends AppCompatActivity {
 
         fstore = FirebaseFirestore.getInstance();
         DocumentReference documentReference = fstore.collection("Users").document(Userid);
-          documentReference.set(Savescore, SetOptions.merge());
+        documentReference.set(Savescore, SetOptions.merge());
 
 
-          leaader.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  startActivity(new Intent(getApplicationContext(),Leaderboard.class));
-                  finish();
+        leaader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Leaderboard.class));
+                finish();
+
+            }
+        });
+
+        ckques.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Result.this,checkanswers.class);
+                i.putExtra("uanswers",wrongans);
+                i.putExtra("catid",catid);
+                startActivity(i);
+                finish();
+            }
+        });
+
+    }
+             /*   fstore.collection("CAT"+catid).document(qs)
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            ques.setText(qs+"."+documentSnapshot.getString("Q"));
+                            opt1.setText(documentSnapshot.getString("A"));
+                            opt2.setText(documentSnapshot.getString("B"));
+                            opt3.setText(documentSnapshot.getString("C"));
+                            opt4.setText(documentSnapshot.getString("D"));
+                            answer =documentSnapshot.getString("Ans");
+
+                            progress.dismiss();
+                            countDownTimer.start();
+
+
+                        }
+            }
+
 
               }
           });
@@ -98,17 +145,19 @@ public class Result extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
-    private void checkscore() {
+     public void checkscore() {
         if(score>highscore)
         {
             Map<String, String> Savescore = new HashMap<>();
             Savescore.put("score_"+subject+"H",String.valueOf(score));
             fstore = FirebaseFirestore.getInstance();
-            DocumentReference documentReference = fstore.collection("Users").document(Userid);
+           DocumentReference documentReference = fstore.collection("Users").document(Userid);
             documentReference.set(Savescore, SetOptions.merge());
 
         }
-    }
+     }
+
 }
+

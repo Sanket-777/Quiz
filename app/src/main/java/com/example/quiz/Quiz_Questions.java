@@ -26,9 +26,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class Quiz_Questions extends AppCompatActivity {
 
     TextView ques,tim,high;
+    int q1,q2,q3,q4,q5,q6,q7,q8,q9,q10;
     long Highscore_C=0;
     RadioGroup op;
-    int uanswer,i=0,j,catid,useranswer[],databsanswer[],questionno=1,Result;
+    int uanswer,i=0,j,catid,questionno=1,useranswer[],wrngquestionno[];
     Button nxtquestion;
     String answer,subject,userid,hightxt;
     RadioButton opt1,opt2,opt3,opt4;
@@ -63,7 +64,9 @@ public class Quiz_Questions extends AppCompatActivity {
         tim = findViewById(R.id.timer);
         high = findViewById(R.id.highscore);
         useranswer = new int[12];
-        databsanswer =  new int[12];
+        wrngquestionno = new int[12];
+        
+
         questionno=1;
         count=0;
         userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -110,12 +113,20 @@ public class Quiz_Questions extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Toast.makeText(Quiz_Questions.this, "Time Up", Toast.LENGTH_SHORT).show();
-                questionno=questionno+1;
-                op.clearCheck();
-                progress.show();
-                optionselected=true;
-                loaddata();
+                if(questionno==10)
+                {
+                    setMessage();
+                }
+                else 
+                {
+                    Toast.makeText(Quiz_Questions.this, "Time Up", Toast.LENGTH_SHORT).show();
+                    questionno=questionno+1;
+                    op.clearCheck();
+                    progress.show();
+                    optionselected=true;
+                    loaddata();
+                }
+               
 
             }
         };
@@ -131,12 +142,18 @@ public class Quiz_Questions extends AppCompatActivity {
                 }
                 else if(optionselected==true)
                 {
-                    countDownTimer.cancel();
-                    progress.show();
-                    questionno=questionno+1;
-                    op.clearCheck();
-                    loaddata();
-                    progress.dismiss();
+                    if(questionno==11)
+                    {
+                        setMessage();
+                    }
+                    else {
+                        countDownTimer.cancel();
+                        progress.show();
+                        questionno = questionno + 1;
+                        op.clearCheck();
+                        loaddata();
+                        progress.dismiss();
+                    }
                 }
             }
         });
@@ -171,17 +188,24 @@ public class Quiz_Questions extends AppCompatActivity {
                     else if(catid==4)
                     {
                         high.setText("HighScore :"+(documentSnapshot.getString("score_Php")));
-                        hightxt = documentSnapshot.getString("score_Php");
+                        hightxt = documentSnapshot.getString("score_PhpH");
                     }
                     else if(catid==5)
                     {
                         high.setText("HighScore :"+(documentSnapshot.getString("score_Js")));
-                        hightxt = documentSnapshot.getString("score_Js");
+                        hightxt = documentSnapshot.getString("score_JsH");
                     }
                     else if(catid==6)
                     {
                         high.setText("HighScore :"+(documentSnapshot.getString("score_Html")));
-                        hightxt = documentSnapshot.getString("score_Html");
+                        hightxt = documentSnapshot.getString("score_HtmlH");
+                    }
+
+                    if(hightxt==null)
+                    {
+                        high.setText("00");
+                        hightxt ="0";
+
                     }
 
                 }
@@ -228,8 +252,7 @@ public class Quiz_Questions extends AppCompatActivity {
         }
         int dbanswer=0;
         dbanswer= Integer.valueOf(answer);
-        databsanswer[questionno]=dbanswer;
-
+        Log.d(TAG, "checkanswer : "+useranswer[questionno]);
         if(dbanswer==uanswer)
         {
             count=count+1;
@@ -237,9 +260,9 @@ public class Quiz_Questions extends AppCompatActivity {
         }
         else
         {
+            useranswer[questionno]=uanswer;
+            wrngquestionno[questionno]=questionno;
 
-            Log.d(TAG, "User anser: "+uanswer);
-            Log.d(TAG, "System Anser: "+answer);
         }
     }
 
@@ -258,6 +281,7 @@ public class Quiz_Questions extends AppCompatActivity {
                         opt3.setText(documentSnapshot.getString("C"));
                         opt4.setText(documentSnapshot.getString("D"));
                         answer =documentSnapshot.getString("Ans");
+                        
                         progress.dismiss();
                         countDownTimer.start();
 
@@ -265,51 +289,8 @@ public class Quiz_Questions extends AppCompatActivity {
                     }
                     else if(i==11)
                     {
-                        tim.setVisibility(View.GONE);
-                        countDownTimer.cancel();
-
-                        Log.d(TAG, "onSuccess: "+subject);
-                        progress.dismiss();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Quiz_Questions.this);
-                        builder.setMessage("Congratulations ! You have Completed the Quiz");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Do nothing but close the dialog
-                                score=count;
-                                Intent i = new Intent(Quiz_Questions.this, com.example.quiz.Result.class);
-                                String highs = hightxt;
-                                if (catid == 1) {
-                                    subject = "Cpp";
-                                    i.putExtra("Subject",subject);
-                                } else if (catid == 2) {
-                                    subject = "C";
-                                    i.putExtra("Subject",subject);
-                                } else if (catid == 3) {
-                                    subject = "Java";
-                                    i.putExtra("Subject",subject);
-                                } else if (catid == 4) {
-                                    subject = "Php";
-                                    i.putExtra("Subject",subject);
-                                } else if (catid == 5) {
-                                    subject = "Js";
-                                    i.putExtra("Subject",subject);
-                                } else if (catid == 6) {
-                                    subject = "Html";
-                                    i.putExtra("Subject",subject);
-                                }
-                                Log.d(TAG, "Subject"+subject);
-
-                                i.putExtra("Highscore",highs);
-                                i.putExtra("marks",score);
-                                startActivity(i);
-                                dialog.dismiss();
-                            }
-
-                        });
-
-                        builder.show();
-
+                        setMessage();
+                       
                     }
                     else {
                         Log.d(TAG, "Retrieval Failed:"+i);
@@ -319,6 +300,59 @@ public class Quiz_Questions extends AppCompatActivity {
 
 
 
+
+
+    }
+
+    private void setMessage() {
+        tim.setVisibility(View.GONE);
+        countDownTimer.cancel();
+
+        Log.d(TAG, "onSuccess: "+subject);
+        progress.dismiss();
+        AlertDialog.Builder builder = new AlertDialog.Builder(Quiz_Questions.this);
+        builder.setMessage("Congratulations ! You have Completed the Quiz");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+                score=count;
+                Intent i = new Intent(Quiz_Questions.this, com.example.quiz.Result.class);
+                String highs = hightxt;
+
+
+
+                if (catid == 1) {
+                    subject = "Cpp";
+                    i.putExtra("Subject",subject);
+                } else if (catid == 2) {
+                    subject = "C";
+                    i.putExtra("Subject",subject);
+                } else if (catid == 3) {
+                    subject = "Java";
+                    i.putExtra("Subject",subject);
+                } else if (catid == 4) {
+                    subject = "Php";
+                    i.putExtra("Subject",subject);
+                } else if (catid == 5) {
+                    subject = "Js";
+                    i.putExtra("Subject",subject);
+                } else if (catid == 6) {
+                    subject = "Html";
+                    i.putExtra("Subject",subject);
+                }
+                Log.d(TAG, "Subject"+subject);
+                i.putExtra("Highscore",highs);
+                i.putExtra("marks",score);
+                i.putExtra("answers",useranswer);
+                i.putExtra("catid",catid);
+                startActivity(i);
+                dialog.dismiss();
+            }
+
+        });
+
+        builder.show();
 
 
     }
