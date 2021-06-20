@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Quiz</string>
+    <string name="app_name">Quizeasy</string>
+    <string name ="aboutas">At Quizeasy we provide you amazing quiz question related to different programming languages we also included a timer for each question
+    so take an eye on that  user can also see his/her Highscores in Highscore section .We provide login with email that includes verification.We provide you a platform to create your own quiz and share it with your friends and  this will help each other in sharing his knowledge and creativity</string>
 </resources>

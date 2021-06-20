@@ -20,6 +20,7 @@
             android:layout_gravity="center|top"
             android:layout_width="wrap_content"
             android:text="Result"
+            android:fontFamily="@font/font10"
             android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:textSize="50sp"
@@ -46,15 +47,6 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/lead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:textColor="@color/white"
-        android:text="Go to LeaderBoard"
-        android:layout_gravity="center"
-        />
-    <Button
         android:id="@+id/checkquestions"
         android:layout_margin="19dp"
         android:layout_width="wrap_content"
@@ -64,4 +56,12 @@
         android:text="Low Score!!Wanna Check Answers Click Here"
         android:layout_gravity="center"
         />
-</LinearLayout>
+    <Button
+        android:id="@+id/again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Take the Quiz Again"
+        android:fontFamily="@font/font10"
+        android:backgroundTint="@color/black"
+        /></LinearLayout>

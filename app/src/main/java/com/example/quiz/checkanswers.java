@@ -24,7 +24,7 @@ public class checkanswers extends AppCompatActivity {
     TextView ques, tim, high;
     RadioGroup op;
     RadioButton opt1, opt2, opt3, opt4;
-    Button nxtquestion;
+    Button nxtquestion,gohome;
     int useranwers[];
     final String TAG = "Get User Answers";
     FirebaseFirestore firestore;
@@ -43,7 +43,11 @@ public class checkanswers extends AppCompatActivity {
         opt2 = findViewById(R.id.opt22);
         opt3 = findViewById(R.id.opt33);
         opt4 = findViewById(R.id.opt44);
+
+
+
         nxtquestion = findViewById(R.id.nxtquess);
+        gohome = findViewById(R.id.gohome);
         extrass = getIntent().getExtras();
         catid = extrass.getInt("catid");
         useranwers = new int[12];
@@ -60,6 +64,19 @@ public class checkanswers extends AppCompatActivity {
             public void onClick(View v) {
                 qs++;
                 getQuestionanswers();
+                if(qs==10)
+                {
+                    startActivity(new Intent(checkanswers.this,MainActivity.class));
+                    finish();
+                }
+            }
+        });
+
+        gohome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(checkanswers.this,MainActivity.class));
+
             }
         });
 
@@ -73,6 +90,16 @@ public class checkanswers extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
+                    opt1.setBackgroundColor(Color.rgb(124,125,127));
+                    opt2.setBackgroundColor(Color.rgb(124,125,127));
+                    opt3.setBackgroundColor(Color.rgb(124,125,127));
+                    opt4.setBackgroundColor(Color.rgb(124,125,127));
+
+                    opt1.setTextColor(Color.BLACK);
+                    opt2.setTextColor(Color.BLACK);
+                    opt3.setTextColor(Color.BLACK);
+                    opt4.setTextColor(Color.BLACK);
+
                     ques.setText(qs + "." + documentSnapshot.getString("Q"));
                     opt1.setText(documentSnapshot.getString("A"));
                     opt2.setText(documentSnapshot.getString("B"));

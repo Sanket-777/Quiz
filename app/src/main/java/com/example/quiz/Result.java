@@ -29,7 +29,7 @@ import java.util.Map;
 public class Result extends AppCompatActivity {
     TextView marks;
     int score,rank,highscore,wrongques[],wrongans[],catid;
-    Button leaader,ckques;
+    Button leaader,ckques,again;
     Bundle extras;
     Scores scores;
     final String TAG="Get Wrong";
@@ -52,7 +52,7 @@ public class Result extends AppCompatActivity {
         pg.show();
         wrongans = new int[12];
 
-        leaader = findViewById(R.id.lead);
+        again = findViewById(R.id.again);
         marks = findViewById(R.id.marks);
         ckques = findViewById(R.id.checkquestions);
 
@@ -98,14 +98,13 @@ public class Result extends AppCompatActivity {
         documentReference.set(Savescore, SetOptions.merge());
 
 
-        leaader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Leaderboard.class));
-                finish();
-
-            }
-        });
+       again.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(Result.this,Quiz_Questions.class));
+               finish();
+           }
+       });
 
         ckques.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,33 +118,7 @@ public class Result extends AppCompatActivity {
         });
 
     }
-             /*   fstore.collection("CAT"+catid).document(qs)
-                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            ques.setText(qs+"."+documentSnapshot.getString("Q"));
-                            opt1.setText(documentSnapshot.getString("A"));
-                            opt2.setText(documentSnapshot.getString("B"));
-                            opt3.setText(documentSnapshot.getString("C"));
-                            opt4.setText(documentSnapshot.getString("D"));
-                            answer =documentSnapshot.getString("Ans");
 
-                            progress.dismiss();
-                            countDownTimer.start();
-
-
-                        }
-            }
-
-
-              }
-          });
-
-
-
-
-    }*/
 
      public void checkscore() {
         if(score>highscore)

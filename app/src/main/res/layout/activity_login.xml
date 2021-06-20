@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         tools:context=".Login"
+        android:background="@drawable/forgot"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,13 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
+            android:fontFamily="@font/font10"
             android:layout_marginTop="40sp"
             android:layout_gravity="center"
             android:textSize="55dp"
             android:textColor="@color/black"/>
         <EditText
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
             android:drawableStart="@drawable/ic_email"
             android:drawableTint="#0099ff"
             android:id="@+id/l_email"
@@ -32,16 +34,19 @@
             android:hint="Email" />
 
         <EditText
+            android:layout_marginTop="20dp"
             android:drawablePadding="12dp"
             android:drawableTint="#0099ff"
             android:drawableStart="@drawable/ic_password"
             android:id="@+id/l_password"
             android:padding="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
             android:inputType="textPassword"
             android:background="@drawable/custome_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+
             android:hint="Password"
             />
 

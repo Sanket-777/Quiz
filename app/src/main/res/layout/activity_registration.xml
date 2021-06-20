@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout
-
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="40dp"
+        android:background="@drawable/forgot"
         android:orientation="vertical">
-
-    tools:ignore="MissingConstraints">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="30sp"
+        android:layout_marginLeft="30sp"
+        android:layout_marginTop="100dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Registration"
+            android:fontFamily="@font/font10"
             android:textSize="35sp"
             android:textColor="@color/black"
             />
@@ -81,4 +83,5 @@
             android:backgroundTint="#0099ff"
             android:text="Sign up"
             android:textColor="@color/black" />
+    </LinearLayout>
     </LinearLayout>

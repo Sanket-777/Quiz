@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@drawable/forgot"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,11 +14,11 @@
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#626060"
         android:drawableEnd="@drawable/ic_baseline_arrow_back_24"
         android:drawableTint="@color/black"
         android:text="Go Home"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

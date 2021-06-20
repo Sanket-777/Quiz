@@ -73,7 +73,8 @@ public class Quiz_Questions extends AppCompatActivity {
         catid = extras.getInt("catid");
         firestore = FirebaseFirestore.getInstance();
         checkhighscore();
-        loaddata();
+        showdialog();
+
         countDownTimer = new CountDownTimer(20000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -159,6 +160,26 @@ public class Quiz_Questions extends AppCompatActivity {
         });
     }
 
+    private void showdialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Quiz_Questions.this);
+        builder.setCancelable(false);
+        builder.setMessage("The following Quiz contains 10 question each for 1 mark and there is also a timer for each question of 20 seconds you can't skip a question.All THE BEST FOR YOUR QUIZ ");
+        builder.setPositiveButton("Start Quiz", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+
+                dialog.dismiss();
+                loaddata();
+
+            }
+        });
+
+        builder.show();
+
+    }
+
+
     void checkhighscore() {
         userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firestore = FirebaseFirestore.getInstance();
@@ -187,23 +208,23 @@ public class Quiz_Questions extends AppCompatActivity {
                     }
                     else if(catid==4)
                     {
-                        high.setText("HighScore :"+(documentSnapshot.getString("score_Php")));
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_PhpH")));
                         hightxt = documentSnapshot.getString("score_PhpH");
                     }
                     else if(catid==5)
                     {
-                        high.setText("HighScore :"+(documentSnapshot.getString("score_Js")));
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_JsH")));
                         hightxt = documentSnapshot.getString("score_JsH");
                     }
                     else if(catid==6)
                     {
-                        high.setText("HighScore :"+(documentSnapshot.getString("score_Html")));
+                        high.setText("HighScore :"+(documentSnapshot.getString("score_HtmlH")));
                         hightxt = documentSnapshot.getString("score_HtmlH");
                     }
 
                     if(hightxt==null)
                     {
-                        high.setText("00");
+                        high.setText("Highscore :00");
                         hightxt ="0";
 
                     }
@@ -345,9 +366,7 @@ public class Quiz_Questions extends AppCompatActivity {
                 startActivity(i);
                 dialog.dismiss();
             }
-
         });
-
         builder.show();
 
 

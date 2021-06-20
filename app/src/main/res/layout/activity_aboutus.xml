@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/forgot"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="60dp"
+        android:onClick="onbackpressed"
+        android:layout_height="60dp"
+        android:background="@drawable/blackarrow"
+        android:textSize="20dp" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/black"
+        app:cardCornerRadius="10sp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About Us"
+            android:layout_gravity="top|center"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="35sp"
+            android:fontFamily="@font/font10"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/black"
+        app:cardCornerRadius="10sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:fontFamily="@font/font10"
+            android:text="Quizeasy"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:fontFamily="@font/font10"
+            android:text="@string/aboutas"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_marginTop="259dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:fontFamily="@font/font10"
+            android:text="Team Quizeasy"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

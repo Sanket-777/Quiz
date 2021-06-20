@@ -4,25 +4,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/forgot"
     android:layout_height="match_parent"
     tools:context=".Create_your_quiz"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/QuestionNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Question No:1"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/font10"
+       android:gravity="center"
+        android:layout_marginTop="20dp"
+        />
+
     <EditText
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="category"
+        android:textColorHint="@color/black"
+        android:inputType="number"
+        android:hint="Enter Unique code(Number) for accessing the quiz eg.1234"
         />
-<EditText
-    android:layout_gravity="center"
-    android:layout_margin="10dp"
-    android:id="@+id/questionno"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Enter Question Number:Q1"
-    />
     <EditText
         android:layout_gravity="center"
         android:layout_margin="10dp"
@@ -50,7 +57,7 @@
     android:id="@+id/c_opt3"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="option 4"
+    android:hint="option 3"
     /><EditText
     android:layout_gravity="center"
     android:layout_margin="10dp"
@@ -62,9 +69,10 @@
     android:layout_gravity="center"
     android:layout_margin="10dp"
     android:id="@+id/c_ans"
+    android:inputType="number"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="Enter answer number"
+    android:hint="Enter answer Like 1,2,3,4(Option number)"
     />
 
     <Button

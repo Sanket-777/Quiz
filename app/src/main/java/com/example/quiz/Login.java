@@ -39,12 +39,14 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_login);
 
-        if(mAuth.getCurrentUser()!=null)
+        if(mAuth.getCurrentUser().isEmailVerified())
         {
             Intent i = new Intent(Login.this,MainActivity.class);
             startActivity(i);
             finish();
         }
+        else
+
 
 
         show_pass = findViewById(R.id.show_password);
@@ -134,11 +136,18 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            pg.setVisibility(View.GONE);
-                            Toast.makeText(Login.this,"Sign-In Sucessfull",Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(Login.this,MainActivity.class);
-                            startActivity(i);
-                            finish();
+                            {
+                                if (mAuth.getCurrentUser().isEmailVerified()) {
+                                    pg.setVisibility(View.GONE);
+                                    Toast.makeText(Login.this, "Sign-In Sucessfull", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(Login.this, MainActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                } else {
+                                    pg.setVisibility(View.GONE);
+                                    Toast.makeText(Login.this, "Please Verify your Email First", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                         }
                         else
                         {

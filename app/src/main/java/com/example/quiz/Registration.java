@@ -82,26 +82,24 @@ public class Registration extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Registration.this, "User Sucessfully Created", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),Login.class));
+                            finish();
                             Map<String,String> Userdata = new HashMap<>();
                             Userdata.put("Name",Name);
-
-                            /*Userdata.put("score_Cpp", "0");
-                            Userdata.put("score_C", "0");
-                            Userdata.put("score_Java", "0");
-                            Userdata.put("score_Php", "0");
-                            Userdata.put("score_Js", "0");
-                            Userdata.put("score_Html", "0");*/
                             String userid= mAuth.getCurrentUser().getUid();
                             fstore = FirebaseFirestore.getInstance();
                             DocumentReference documentReference = fstore.collection("Users").document(userid);
                             documentReference.set(Userdata);
-                            startActivity(new Intent(getApplicationContext(),Login.class));
-                            finish();
-                            /*ref = FirebaseDatabase.getInstance().getReference().child("Scores");
-                            score = new Scores();
-                            score.setName(Name);
-                            ref.child(userid).setValue(score);*/
+
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            firebaseUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(Registration.this, "Check Your Email for Verfication", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
                         }
 
 
