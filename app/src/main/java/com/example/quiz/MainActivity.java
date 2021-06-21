@@ -94,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this,activity_DIsplayHigscores.class));
             finish();
 
+        } if(item_id==R.id.Share)
+        {
+
+            Intent email = new Intent(Intent.ACTION_SEND);
+            email.setType("text/plain");
+            email.putExtra(Intent.EXTRA_TEXT, "Enter your Message here");
+            startActivity(Intent.createChooser(email, "Share App using :"));
         }
         return true;
 

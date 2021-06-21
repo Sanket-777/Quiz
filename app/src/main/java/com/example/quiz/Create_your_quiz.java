@@ -57,7 +57,7 @@ public class Create_your_quiz extends AppCompatActivity {
         subm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i==11)
+                if(i==10)
                 {
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(Create_your_quiz.this);
                     builder2.setCancelable(false);

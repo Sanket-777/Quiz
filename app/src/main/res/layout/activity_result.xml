@@ -64,4 +64,14 @@
         android:text="Take the Quiz Again"
         android:fontFamily="@font/font10"
         android:backgroundTint="@color/black"
-        /></LinearLayout>
+        />
+    <Button
+        android:id="@+id/homepage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Go to Home Page"
+        android:fontFamily="@font/font10"
+        android:backgroundTint="@color/black"
+        />
+</LinearLayout>

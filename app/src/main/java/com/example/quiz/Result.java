@@ -29,7 +29,7 @@ import java.util.Map;
 public class Result extends AppCompatActivity {
     TextView marks;
     int score,rank,highscore,wrongques[],wrongans[],catid;
-    Button leaader,ckques,again;
+    Button leaader,ckques,again,gohome;
     Bundle extras;
     Scores scores;
     final String TAG="Get Wrong";
@@ -55,6 +55,7 @@ public class Result extends AppCompatActivity {
         again = findViewById(R.id.again);
         marks = findViewById(R.id.marks);
         ckques = findViewById(R.id.checkquestions);
+        gohome = findViewById(R.id.homepage);
 
         Intent i =getIntent();
         wrongans = i.getIntArrayExtra("answers");
@@ -97,10 +98,17 @@ public class Result extends AppCompatActivity {
         DocumentReference documentReference = fstore.collection("Users").document(Userid);
         documentReference.set(Savescore, SetOptions.merge());
 
-
+        gohome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Result.this,MainActivity.class));
+                finish();
+            }
+        });
        again.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               again.setVisibility(View.GONE);
                startActivity(new Intent(Result.this,Quiz_Questions.class));
                finish();
            }

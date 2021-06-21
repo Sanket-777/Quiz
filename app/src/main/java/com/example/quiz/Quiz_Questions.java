@@ -368,8 +368,6 @@ public class Quiz_Questions extends AppCompatActivity {
                 Intent i = new Intent(Quiz_Questions.this, com.example.quiz.Result.class);
                 int highs = Integer.parseInt(hightxt);
 
-
-
                 if (catid == 1) {
                     subject = "Cpp";
                     i.putExtra("Subject",subject);
