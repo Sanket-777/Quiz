@@ -8,13 +8,6 @@
     android:layout_height="match_parent"
     >
 
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="60dp"
-        android:onClick="onbackpressed"
-        android:layout_height="60dp"
-        android:background="@drawable/blackarrow"
-        android:textSize="20dp" />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

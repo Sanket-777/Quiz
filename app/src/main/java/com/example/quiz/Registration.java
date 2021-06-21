@@ -99,7 +99,19 @@ public class Registration extends AppCompatActivity {
 
                                 }
                             });
+                            FirebaseUser fuser = mAuth.getCurrentUser();
 
+                            if(fuser.isEmailVerified())
+                            {
+                                Intent i = new Intent(Registration.this,MainActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                            else {
+                                Intent i = new Intent(Registration.this,Login.class);
+                                startActivity(i);
+                                finish();
+                            }
                         }
 
 

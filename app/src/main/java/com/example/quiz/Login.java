@@ -29,23 +29,19 @@ public class Login extends AppCompatActivity {
     String s_email,s_pass;
     Button login,forgot_pass,signup;
     private long pressedTime;
-    private FirebaseAuth mAuth=null;
-    FirebaseUser fuser;
+    private FirebaseAuth mAuth;
+
     ProgressBar pg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+       FirebaseUser fuser = mAuth.getCurrentUser();
         setContentView(R.layout.activity_login);
 
-        if(mAuth.getCurrentUser().isEmailVerified())
-        {
-            Intent i = new Intent(Login.this,MainActivity.class);
-            startActivity(i);
-            finish();
-        }
-        else
+
+
 
 
 

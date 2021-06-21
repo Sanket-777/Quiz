@@ -57,7 +57,7 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    app:cardBackgroundColor="@color/black"
+                    app:cardBackgroundColor="#494646"
                     app:cardCornerRadius="100dp">
 
                     <TextView
@@ -76,7 +76,7 @@
                     app:cardCornerRadius="100dp"
                     android:background="#E07575"
                     android:layout_margin="10sp"
-                    app:cardBackgroundColor="@color/black"
+                    app:cardBackgroundColor="#494646"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -105,12 +105,12 @@
             app:cardCornerRadius="100dp"
             android:background="#E07575"
             android:layout_margin="10sp"
-            app:cardBackgroundColor="@color/black"
+            app:cardBackgroundColor="#494646"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20dp" >
+            android:textSize="20sp" >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
             app:cardCornerRadius="100dp"
             android:background="#E07575"
             android:layout_margin="10sp"
-            app:cardBackgroundColor="@color/black"
+            app:cardBackgroundColor="#494646"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
@@ -154,7 +154,7 @@
         app:cardCornerRadius="100dp"
         android:background="#E07575"
         android:layout_margin="10sp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="#494646"
         android:id="@+id/Javascript"
         android:layout_gravity="center"
         android:layout_weight="1"
@@ -176,7 +176,7 @@
         app:cardCornerRadius="100dp"
         android:background="#E07575"
         android:layout_margin="10sp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="#494646"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
