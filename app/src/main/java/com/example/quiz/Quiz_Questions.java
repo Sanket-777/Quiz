@@ -160,6 +160,35 @@ public class Quiz_Questions extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AlertDialog.Builder builder = new AlertDialog.Builder(Quiz_Questions.this);
+        builder.setCancelable(false);
+        builder.setMessage("Do you want to exit the Quiz");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+                startActivity(new Intent(Quiz_Questions.this ,MainActivity.class));
+                finish();
+                dialog.dismiss();
+
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
+    }
+
     private void showdialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Quiz_Questions.this);
         builder.setCancelable(false);
@@ -308,13 +337,14 @@ public class Quiz_Questions extends AppCompatActivity {
 
 
                     }
-                    else if(i==11)
+                    else if(i>10)
                     {
                         setMessage();
                        
                     }
                     else {
                         Log.d(TAG, "Retrieval Failed:"+i);
+                        Toast.makeText(Quiz_Questions.this, "No such Quiz", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -323,6 +353,7 @@ public class Quiz_Questions extends AppCompatActivity {
 
     private void setMessage() {
         tim.setVisibility(View.GONE);
+        high.setVisibility(View.GONE);
         countDownTimer.cancel();
 
         Log.d(TAG, "onSuccess: "+subject);

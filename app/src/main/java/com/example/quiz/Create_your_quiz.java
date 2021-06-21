@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +57,26 @@ public class Create_your_quiz extends AppCompatActivity {
         subm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(i==11)
+                {
+                    AlertDialog.Builder builder2 = new AlertDialog.Builder(Create_your_quiz.this);
+                    builder2.setCancelable(false);
+                    builder2.setMessage("You Have submitted all the questions.You can now share this code  "+uniquecode+" to your friends and access the quiz");
+                    builder2.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing but close the dialog
+
+                            dialog.dismiss();
+
+
+                        }
+                    });
+
+                    builder2.show();
+                    startActivity(new Intent(Create_your_quiz.this,MainActivity.class));
+                    finish();
+                }
                 pg.show();
                 s_cat = cat.getText().toString();
                 s_ques = ques.getText().toString();
@@ -69,7 +91,7 @@ public class Create_your_quiz extends AppCompatActivity {
                 }
                 else
                 {
-                    uniquecode = s_cat;
+                    uniquecode = "CAT"+s_cat;
                     cat.setVisibility(View.GONE);
                 }
 
@@ -84,7 +106,14 @@ public class Create_your_quiz extends AppCompatActivity {
 
     }
 
-    private boolean validate(String s_ques, String s_op1, String s_op2, String s_op3, String s_op4,String s_ans) {
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Create_your_quiz.this,MainActivity.class));
+    }
+
+    private boolean validate(String s_ques, String s_op1, String s_op2, String s_op3, String s_op4, String s_ans) {
         boolean valid = true;
         if (s_cat.isEmpty()) {
             cat.setError("Field Empty");
@@ -155,9 +184,12 @@ public class Create_your_quiz extends AppCompatActivity {
             pg.cancel();
             return  valid;
         }
-        else {
+        else
+        {
+
             ans.setError(null);
         }
+
         return valid;
     }
 

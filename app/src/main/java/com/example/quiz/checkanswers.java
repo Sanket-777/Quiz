@@ -64,7 +64,7 @@ public class checkanswers extends AppCompatActivity {
             public void onClick(View v) {
                 qs++;
                 getQuestionanswers();
-                if(qs==10)
+                if(qs==11)
                 {
                     startActivity(new Intent(checkanswers.this,MainActivity.class));
                     finish();
@@ -150,6 +150,28 @@ public class checkanswers extends AppCompatActivity {
                         else if (useranwers[qs] == 4)
                         {
                             opt4.setBackgroundColor(Color.RED);
+                            opt4.setTextColor(Color.WHITE);
+                        }
+
+                        //for correct answer
+                        if (ianswer == 1)
+                        {
+                            opt1.setBackgroundColor(Color.GREEN);
+                            opt1.setTextColor(Color.WHITE);
+                        }
+                        else if (ianswer == 2)
+                        {
+                            opt2.setBackgroundColor(Color.GREEN);
+                            opt2.setTextColor(Color.WHITE);
+                        }
+                        else if (ianswer== 3)
+                        {
+                            opt3.setBackgroundColor(Color.GREEN);
+                            opt3.setTextColor(Color.WHITE);
+                        }
+                        else if (ianswer == 4)
+                        {
+                            opt4.setBackgroundColor(Color.GREEN);
                             opt4.setTextColor(Color.WHITE);
                         }
                     }
