@@ -108,7 +108,6 @@ public class Result extends AppCompatActivity {
        again.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               again.setVisibility(View.GONE);
                startActivity(new Intent(Result.this,Quiz_Questions.class));
                finish();
            }
